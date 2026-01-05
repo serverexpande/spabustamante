@@ -8,6 +8,10 @@ css
     --claro: #fcfaf7;       /* Fondo crema muy ligero */
     --blanco: #ffffff;
 }
+html {
+    scroll-behavior: smooth;
+    /* Esto hace que el salto a las secciones sea fluido y elegante */
+}
 
 * {
     box-sizing: border-box;
