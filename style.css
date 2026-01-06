@@ -147,14 +147,15 @@ nav a:hover {
 
 /* --- 3. HERO SECTION (Imagen o Video) --- */
 .hero {
-    height: 100vh; /* Que ocupe toda la pantalla para un efecto premium */
+    background-image: url('img/verologofondozip.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* Elimina o comenta la línea de height si es fija, usa min-height */
+    min-height: 100vh; 
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    overflow: hidden;
-    /* Asegúrate de tener el linear-gradient oscuro para que el texto blanco se lea bien */
-    
 }
 
 .hero-content h1 {
