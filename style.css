@@ -405,19 +405,29 @@ section {
 /* AJUSTES PARA MÓVILES */
 @media (max-width: 768px) {
     .hero {
-        background-attachment: scroll !important; /* Desactiva parallax en móvil */
-        background-position: center center !important;
+        /* Cambiamos 'center' por 'right' para que enfoque a la persona */
+        background-position: right center !important;
+        
+        /* Aseguramos que la imagen cubra todo el espacio disponible */
         background-size: cover !important;
-        height: 60vh; /* Ajusta la altura para que no sea tan larga en móvil */
-    }
-
-    .contact-info {
+        
+        /* Desactivamos el fixed que da problemas en móvil */
         background-attachment: scroll !important;
-        background-position: center !important;
+        
+        /* Ajustamos la altura para que la persona se vea bien */
+        height: 80vh; 
+        min-height: 500px;
     }
 
-    .hero-content h1 {
-        font-size: 2rem; /* Tamaño de letra más cómodo para celular */
+    /* Opcional: Si el texto tapa a la persona, podemos moverlo 
+       un poco hacia la izquierda o ponerle un fondo semi-transparente */
+    .hero-content {
+        text-align: left;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.2); /* Sutil velo para legibilidad */
+        backdrop-filter: blur(5px); /* Efecto de vidrio esmerilado */
+        width: 80%;
+        margin-left: 5%;
     }
 }
 
