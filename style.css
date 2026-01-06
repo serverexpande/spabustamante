@@ -20,17 +20,18 @@ html {
 }
 
 body {
-    font-family: 'Poppins', sans-serif; /* Fuente moderna y limpia */
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
     color: var(--texto);
     line-height: 1.6;
-    background-color: var(--blanco);
+    background-color: #ffffff; /* Evita que se vea negro en modo oscuro */
 }
 
-h1, h2, h3 {
-    font-family: 'Playfair Display', serif; /* Fuente elegante para títulos */
-    color: var(--oscuro);
-    font-weight: 700;
+section {
+    background-color: #ffffff; /* Asegura que cada sección tenga su fondo */
 }
+
+
 
 /* --- 2. NAVEGACIÓN (Sticky) --- */
 header {
@@ -397,6 +398,25 @@ section {
     }
     .contact-column h3::after {
         margin: 10px auto;
+    }
+}
+
+/* AJUSTES PARA MÓVILES */
+@media (max-width: 768px) {
+    .hero {
+        background-attachment: scroll !important; /* Desactiva parallax en móvil */
+        background-position: center center !important;
+        background-size: cover !important;
+        height: 60vh; /* Ajusta la altura para que no sea tan larga en móvil */
+    }
+
+    .contact-info {
+        background-attachment: scroll !important;
+        background-position: center !important;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem; /* Tamaño de letra más cómodo para celular */
     }
 }
 
