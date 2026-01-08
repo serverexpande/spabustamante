@@ -68,7 +68,12 @@
     <div class="logo">
         <img src="img/dinfondologoorig.png" alt="Logo Vero Spa" class="logo-img">
     </div>
-    <nav>
+    <div class="menu-toggle" id="mobile-menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+    <nav class="nav-menu">
         <a href="#inicio">Inicio</a>
         <a href="#nosotros">Nosotros</a>
         <a href="#servicios">Servicios</a>
@@ -77,9 +82,8 @@
 </header>
 
     
-        <section class="hero" id="inicio">
-        <div class="hero-content">
-            
+        <section class="hero">
+    </section>
             
         </div>
         </section>
@@ -198,5 +202,19 @@
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="whatsapp-icon">
     <span>¿Deseas agendar?</span>
 </a>
+<script>
+    const menu = document.querySelector('#mobile-menu');
+    const menuLinks = document.querySelector('.nav-menu');
+
+    // Abre y cierra el menú al tocar la hamburguesa
+    menu.addEventListener('click', function() {
+        menuLinks.classList.toggle('active');
+    });
+
+    // Cierra el menú automáticamente cuando haces clic en una opción
+    document.querySelectorAll('.nav-menu a').forEach(n => n.addEventListener('click', () => {
+        menuLinks.classList.remove('active');
+    }));
+</script>
 </body>
 </html>
