@@ -252,6 +252,37 @@ section {
         border-radius: 50%;
     }
 }
+/* --- AJUSTE PARA QUE LA CHICA SE VEA COMPLETA EN MÓVIL --- */
+@media (max-width: 768px) {
+    .hero {
+        /* 1. Forzamos el foco a la derecha (donde está ella) */
+        background-position: 85% center !important; 
+        
+        /* 2. Cambiamos de 'cover' a '110%' para ganar un poco de zoom out si es necesario */
+        background-size: cover !important; 
+        
+        /* 3. Aumentamos la altura en móvil para que la imagen tenga espacio de estirarse */
+        height: 85vh !important; 
+        min-height: 550px;
+        
+        /* 4. Importante: asegurar que el attachment sea scroll */
+        background-attachment: scroll !important;
+    }
+
+    .hero-content {
+        /* Bajamos el texto para que no tape su cara */
+        justify-content: flex-end;
+        padding-bottom: 50px;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .hero-content h1 {
+        font-size: 1.8rem; /* Texto un poco más pequeño para no invadir la imagen */
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.6); /* Sombra para legibilidad */
+    }
+}
 
 /* --- 5. GRID DE SERVICIOS --- */
 .services {
