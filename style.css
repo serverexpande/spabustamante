@@ -256,7 +256,7 @@ section {
 @media (max-width: 768px) {
     .hero {
         /* 1. Forzamos el foco a la derecha (donde está ella) */
-        background-position: 95% center !important; 
+        background-position: 100% center !important; 
         
         /* 2. Cambiamos de 'cover' a '110%' para ganar un poco de zoom out si es necesario */
         background-size: cover !important; 
