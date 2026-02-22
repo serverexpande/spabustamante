@@ -1,16 +1,101 @@
-css
-/* --- 1. CONFIGURACIÓN BASE --- */
+/* FORZAR MODO CLARO EN TODOS LOS DISPOSITIVOS */
 :root {
-    --dorado: #c5a059;      /* Color principal de Rossana Tabares */
+    color-scheme: light;
+    --dorado: #c5a059;
     --dorado-dark: #b08e4a;
-    --oscuro: #1a1a1a;      /* Para textos importantes y pie de página */
-    --texto: #4a4a4a;       /* Gris suave para lectura */
-    --claro: #fcfaf7;       /* Fondo crema muy ligero */
+    --oscuro: #1a1a1a;
+    --texto: #4a4a4a;
+    --claro: #fcfaf7;
     --blanco: #ffffff;
 }
+
+/* BLOQUEAR MODO OSCURO DEL SISTEMA */
+@media (prefers-color-scheme: dark) {
+    :root {
+        color-scheme: light;
+    }
+    
+    html {
+        background-color: #ffffff !important;
+    }
+    
+    body {
+        background-color: #ffffff !important;
+        color: #4a4a4a !important;
+    }
+    
+    /* Forzar fondos claros en todas las secciones */
+    section {
+        background-color: #ffffff !important;
+    }
+    
+    .services {
+        background-color: #fcfaf7 !important;
+    }
+    
+    .contact-info {
+        background-color: #fcfaf7 !important;
+    }
+    
+    /* Forzar texto oscuro donde debe ser oscuro */
+    .service-card h3,
+    .about h2,
+    .about p,
+    .contact-column h3,
+    .contact-column p,
+    .contact-column a {
+        color: #1a1a1a !important;
+    }
+    
+    .service-card p,
+    .contact-column p {
+        color: #4a4a4a !important;
+    }
+    
+    /* Mantener tarjetas blancas */
+    .service-card {
+        background: #ffffff !important;
+        border-color: #eeeeee !important;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05) !important;
+    }
+    
+    /* Footer claro */
+    footer {
+        background: #ffffff !important;
+        border-color: #eeeeee !important;
+    }
+    
+    /* Navegación clara cuando hace scroll */
+    header.header-active {
+        background: rgba(255, 255, 255, 0.95) !important;
+    }
+    
+    header.header-active nav a {
+        color: #1a1a1a !important;
+    }
+    
+    /* El hero mantiene texto blanco sobre imagen oscura */
+    .hero-content h1,
+    .hero-content p {
+        color: #ffffff !important;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5) !important;
+    }
+    
+    /* Stats se mantiene oscura (es diseño intencional) */
+    .stats {
+        background: #1a1a1a !important;
+        color: #ffffff !important;
+    }
+    
+    .stat-item h2 {
+        color: #c5a059 !important;
+    }
+}
+
+/* --- CONFIGURACIÓN BASE --- */
 html {
     scroll-behavior: smooth;
-    /* Esto hace que el salto a las secciones sea fluido y elegante */
+    background-color: #ffffff;
 }
 
 * {
@@ -24,22 +109,23 @@ body {
     margin: 0;
     color: var(--texto);
     line-height: 1.6;
-    background-color: #ffffff; /* Evita que se vea negro en modo oscuro */
+    background-color: #ffffff;
+    /* Prevenir ajustes automáticos del navegador */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 section {
-    background-color: #ffffff; /* Asegura que cada sección tenga su fondo */
+    background-color: #ffffff;
 }
 
-
-
-/* --- 2. NAVEGACIÓN (Sticky) --- */
+/* --- NAVEGACIÓN --- */
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 8%; /* Reducimos el padding vertical para dar más espacio al logo */
-    height: 80px;     /* Fijamos una altura al nav para que sea consistente */
+    padding: 10px 8%;
+    height: 80px;
     position: absolute;
     width: 100%;
     z-index: 1000;
@@ -49,110 +135,60 @@ header {
 .logo {
     display: flex;
     align-items: center;
-    height: 100%; /* El contenedor del logo ocupa todo el alto del nav */
+    height: 100%;
 }
 
 .logo-img {
-    height: 70px;      /* Aumentamos el tamaño (casi al límite de los 80px del nav) */
-    width: auto;       /* Mantiene la proporción */
-    object-fit: contain; 
+    height: 70px;
+    width: auto;
+    object-fit: contain;
     display: block;
+    transition: transform 0.3s ease;
+}
+
+.logo-img:hover {
+    transform: scale(1.05);
 }
 
 nav a {
-    /* Mantenemos tus estilos de botones, ellos se alinearán al centro automáticamente */
     margin-left: 25px;
     text-decoration: none;
-    color: white; 
+    color: white;
     font-weight: 600;
     font-size: 0.9rem;
+    text-transform: uppercase;
+    transition: color 0.3s;
 }
-/* Estilo del header cuando el usuario hace scroll */
+
+nav a:hover {
+    color: var(--dorado);
+}
+
 header.header-active {
-    background: rgba(255, 255, 255, 0.7); /* Blanco con transparencia */
-    backdrop-filter: blur(15px);         /* Este es el efecto esmerilado */
-    -webkit-backdrop-filter: blur(15px); /* Soporte para Safari */
-    padding: 15px 8%;                    /* Se hace un poco más delgado al bajar */
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 15px 8%;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-/* Cambia el color del texto a oscuro cuando el fondo se activa */
 header.header-active .logo,
 header.header-active nav a {
     color: #1a1a1a;
 }
 
-/* Transición suave para que no cambie de golpe */
 header {
     transition: all 0.4s ease-in-out;
 }
 
-/* IMPORTANTE: Cambia el color de los textos para que se vean sobre la imagen oscura */
-.logo-img {
-    height: 50px;       /* Ajusta la altura a tu gusto */
-    width: auto;        /* Mantiene la proporción de la imagen */
-    display: block;     /* Evita espacios extra debajo de la imagen */
-    transition: transform 0.3s ease;
-}
-
-/* Opcional: un pequeño efecto al pasar el mouse */
-.logo-img:hover {
-    transform: scale(1.05);
-}
-
-/* Ajuste para que el header alinee bien el logo con los botones */
-header {
-    display: flex;
-    align-items: center; /* Centra verticalmente logo y botones */
-    justify-content: space-between;
-    padding: 15px 8%;
-}
-
-nav a {
-    color: var(--blanco); /* Color blanco para resaltar sobre el fondo */
-    margin-left: 25px;
-    text-decoration: none;
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    transition: color 0.3s;
-}
-
-nav a:hover {
-    color: var(--dorado);
-}
-
-.logo {
-    font-size: 1.4rem;
-    letter-spacing: 2px;
-    color: var(--oscuro);
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-nav a {
-    margin-left: 25px;
-    text-decoration: none;
-    color: var(--oscuro);
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    transition: color 0.3s;
-}
-
-nav a:hover {
-    color: var(--dorado);
-}
-
-/* --- 3. HERO SECTION (Imagen o Video) --- */
+/* --- HERO SECTION --- */
 .hero {
     background-image: url('img/verologofondozip.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    /* Elimina o comenta la línea de height si es fija, usa min-height */
-    min-height: 100vh; 
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -162,6 +198,7 @@ nav a:hover {
     font-size: clamp(2.5rem, 5vw, 4rem);
     color: var(--blanco);
     margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
 .btn {
@@ -184,7 +221,7 @@ nav a:hover {
     transform: translateY(-3px);
 }
 
-/* --- 4. SECCIONES GENERALES --- */
+/* --- SECCIONES GENERALES --- */
 section {
     padding: 100px 8%;
 }
@@ -200,14 +237,14 @@ section {
     width: 100%;
     height: auto;
     border-radius: 4px;
-    box-shadow: 20px 20px 0px var(--claro); /* Efecto decorativo detrás de la foto */
+    box-shadow: 20px 20px 0px var(--claro);
 }
 
-/* Estilos del Botón Flotante */
+/* --- BOTÓN WHATSAPP --- */
 .whatsapp-float {
     position: fixed;
-    bottom: 20px;       /* Distancia del borde inferior */
-    right: 20px;        /* Distancia del borde derecho */
+    bottom: 20px;
+    right: 20px;
     background-color: #25d366;
     color: white;
     padding: 10px 20px;
@@ -218,10 +255,10 @@ section {
     text-decoration: none;
     font-weight: 600;
     font-size: 0.9rem;
-    z-index: 9999;      /* Asegura que siempre esté encima de todo */
+    z-index: 9999;
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     transition: all 0.3s ease;
-    animation: bounce 2s infinite; /* Animación suave */
+    animation: bounce 2s infinite;
 }
 
 .whatsapp-icon {
@@ -229,20 +266,17 @@ section {
     height: 25px;
 }
 
-/* Efecto al pasar el mouse */
 .whatsapp-float:hover {
     background-color: #128c7e;
     transform: scale(1.05);
     box-shadow: 0 6px 20px rgba(0,0,0,0.3);
 }
 
-/* Animación de rebote sutil */
 @keyframes bounce {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-5px); }
 }
 
-/* En celulares muy pequeños, ocultamos el texto para que no ocupe mucho espacio */
 @media (max-width: 480px) {
     .whatsapp-float span {
         display: none;
@@ -252,39 +286,8 @@ section {
         border-radius: 50%;
     }
 }
-/* --- AJUSTE PARA QUE LA CHICA SE VEA COMPLETA EN MÓVIL --- */
-@media (max-width: 768px) {
-    .hero {
-        /* 1. Forzamos el foco a la derecha (donde está ella) */
-        background-position: 100% center !important; 
-        
-        /* 2. Cambiamos de 'cover' a '110%' para ganar un poco de zoom out si es necesario */
-        background-size: cover !important; 
-        
-        /* 3. Aumentamos la altura en móvil para que la imagen tenga espacio de estirarse */
-        height: 85vh !important; 
-        min-height: 550px;
-        
-        /* 4. Importante: asegurar que el attachment sea scroll */
-        background-attachment: scroll !important;
-    }
 
-    .hero-content {
-        /* Bajamos el texto para que no tape su cara */
-        justify-content: flex-end;
-        padding-bottom: 50px;
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-    }
-
-    .hero-content h1 {
-        font-size: 1.8rem; /* Texto un poco más pequeño para no invadir la imagen */
-        text-shadow: 2px 2px 8px rgba(0,0,0,0.6); /* Sombra para legibilidad */
-    }
-}
-
-/* --- 5. GRID DE SERVICIOS --- */
+/* --- GRID DE SERVICIOS --- */
 .services {
     background-color: var(--claro);
     text-align: center;
@@ -320,14 +323,16 @@ section {
 .service-card h3 {
     margin: 20px 0 10px;
     font-size: 1.5rem;
+    color: var(--oscuro);
 }
 
 .service-card p {
     padding: 0 20px;
     font-size: 0.95rem;
+    color: var(--texto);
 }
 
-/* --- 6. ESTADÍSTICAS --- */
+/* --- ESTADÍSTICAS --- */
 .stats {
     background: var(--oscuro);
     color: var(--blanco);
@@ -350,33 +355,29 @@ section {
     letter-spacing: 2px;
 }
 
+/* --- CONTACTO --- */
 .contact-info {
-    /* Añadimos una imagen de fondo (puedes cambiarla por una de flores, mármol o spa) */
     background-image: url('https://images.unsplash.com/photo-1519750783826-e2420f4d687f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
-    
-    /* ESTO ACTIVA EL PARALLAX */
-    background-attachment: fixed; 
+    background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-
     padding: 100px 8%;
     position: relative;
     overflow: hidden;
 }
 
-/* Capa para suavizar la imagen y que el texto se lea bien */
 .contact-info::before {
     content: "";
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(244, 241, 234, 0.85); /* Tono champagne traslúcido */
+    background: rgba(244, 241, 234, 0.85);
     z-index: 0;
 }
 
 .contact-container {
     position: relative;
-    z-index: 1; /* Para que el texto quede por encima de la capa de color */
+    z-index: 1;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 50px;
@@ -384,7 +385,6 @@ section {
     margin: 0 auto;
 }
 
-/* Pequeña línea decorativa bajo el título */
 .contact-column h3::after {
     content: '';
     display: block;
@@ -412,7 +412,7 @@ section {
 
 .social-links {
     display: flex;
-    flex-direction: column; /* Lista vertical, puedes cambiarlo a 'row' si prefieres */
+    flex-direction: column;
     gap: 10px;
 }
 
@@ -423,60 +423,7 @@ section {
     letter-spacing: 1px;
 }
 
-/* Responsive: en celulares las columnas se apilan automáticamente */
-@media (max-width: 768px) 
-{
-    .contact-info {
-        text-align: center;
-    }
-    .contact-column h3::after {
-        margin: 10px auto;
-    }
-}
-
-/* AJUSTES PARA MÓVILES */
-@media (max-width: 768px) {
-    .hero {
-        background-position: right center !important;
-        background-attachment: scroll !important;
-        height: 80vh; 
-    }
-
-    .hero-content {
-        /* Eliminamos el fondo de vidrio y el desenfoque */
-        background: none !important;
-        backdrop-filter: none !important;
-        border: none !important;
-        
-        /* Ajustamos el texto para que no estorbe */
-        width: 90%;
-        margin: 0 auto;
-        text-align: center; /* O 'left' si prefieres el texto a un lado */
-        
-        /* Opcional: añadimos una sombra al texto para que 
-           se lea bien sobre cualquier parte de la foto */
-        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
-    }
-    
-    .hero-content h1 {
-        color: white; /* Asegúrate de que el texto sea blanco para resaltar */
-        font-size: 2.2rem;
-    }
-}
-
-    /* Opcional: Si el texto tapa a la persona, podemos moverlo 
-       un poco hacia la izquierda o ponerle un fondo semi-transparente */
-    .hero-content 
-    {
-        text-align: left;
-        padding: 20px;
-        background: rgba(255, 255, 255, 0.2); /* Sutil velo para legibilidad */
-        backdrop-filter: blur(5px); /* Efecto de vidrio esmerilado */
-        width: 80%;
-        margin-left: 5%;
-    }
-
-/* --- 7. FOOTER --- */
+/* --- FOOTER --- */
 footer {
     background: var(--blanco);
     padding: 50px 8%;
@@ -484,21 +431,9 @@ footer {
     border-top: 1px solid #eee;
 }
 
-/* --- 8. RESPONSIVE --- */
-@media (max-width: 992px) {
-    .about { grid-template-columns: 1fr; text-align: center; }
-    header { flex-direction: column; gap: 15px; }
-}
-
-@media (max-width: 600px) {
-    .stats { gap: 30px; }
-    nav { display: flex; flex-wrap: wrap; justify-content: center; }
-    nav a { margin: 5px 10px; }
-}
-
-/* Estilo del botón hamburguesa */
+/* --- MENÚ HAMBURGUESA --- */
 .menu-toggle {
-    display: none; /* Oculto en PC */
+    display: none;
     flex-direction: column;
     cursor: pointer;
     gap: 5px;
@@ -507,23 +442,64 @@ footer {
 .bar {
     width: 25px;
     height: 3px;
-    background-color: #b08e4a; /* El dorado de tu marca */
+    background-color: #b08e4a;
     transition: 0.3s;
 }
 
-/* AJUSTES PARA MÓVILES (max-width: 768px) */
+/* --- RESPONSIVE MÓVIL --- */
 @media (max-width: 768px) {
+    /* Forzar colores claros en móvil */
+    body {
+        background-color: #ffffff !important;
+    }
+    
+    section {
+        background-color: #ffffff !important;
+    }
+    
+    .hero {
+        background-position: 100% center !important;
+        background-attachment: scroll !important;
+        height: 85vh !important;
+        min-height: 550px;
+    }
+
+    .hero-content {
+        justify-content: flex-end;
+        padding-bottom: 50px;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        background: none !important;
+        backdrop-filter: none !important;
+        border: none !important;
+        width: 90%;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .hero-content h1 {
+        font-size: 1.8rem;
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+        color: #ffffff !important;
+    }
+    
+    .hero-content p {
+        color: #ffffff !important;
+        text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+    }
+
     .menu-toggle {
-        display: flex; /* Aparece en móvil */
+        display: flex;
         z-index: 1001;
     }
 
     .nav-menu {
         position: fixed;
-        left: -100%; /* Escondido a la izquierda */
+        left: -100%;
         top: 70px;
         flex-direction: column;
-        background-color: white;
+        background-color: #ffffff !important;
         width: 100%;
         text-align: center;
         transition: 0.3s;
@@ -532,7 +508,6 @@ footer {
         z-index: 1000;
     }
 
-    /* Clase que activaremos con JavaScript */
     .nav-menu.active {
         left: 0;
     }
@@ -541,5 +516,62 @@ footer {
         display: block;
         padding: 15px;
         font-size: 1.2rem;
+        color: #1a1a1a !important;
+    }
+    
+    .service-card {
+        background: #ffffff !important;
+        border: 1px solid #eeeeee !important;
+    }
+    
+    .service-card h3 {
+        color: #1a1a1a !important;
+    }
+    
+    .service-card p {
+        color: #4a4a4a !important;
+    }
+    
+    footer {
+        background: #ffffff !important;
+        border-top: 1px solid #eeeeee !important;
+    }
+    
+    .contact-info {
+        background-color: #fcfaf7 !important;
+    }
+    
+    .contact-column h3 {
+        color: #1a1a1a !important;
+    }
+    
+    .contact-column p,
+    .contact-column a {
+        color: #4a4a4a !important;
+    }
+}
+
+@media (max-width: 992px) {
+    .about { 
+        grid-template-columns: 1fr; 
+        text-align: center; 
+    }
+    header { 
+        flex-direction: column; 
+        gap: 15px; 
+    }
+}
+
+@media (max-width: 600px) {
+    .stats { 
+        gap: 30px; 
+    }
+    nav { 
+        display: flex; 
+        flex-wrap: wrap; 
+        justify-content: center; 
+    }
+    nav a { 
+        margin: 5px 10px; 
     }
 }
