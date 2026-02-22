@@ -217,5 +217,13 @@
         menuLinks.classList.remove('active');
     }));
 </script>
+<script>
+        // Bloquear modo oscuro por JavaScript
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.style.colorScheme = 'light';
+            document.body.style.backgroundColor = '#ffffff';
+            document.body.style.color = '#4a4a4a';
+        }
+    </script>
 </body>
 </html>
